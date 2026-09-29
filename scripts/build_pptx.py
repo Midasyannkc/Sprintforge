@@ -176,8 +176,8 @@ def main():
             "pipeline + eval/observability harness + cost-optimization layer + safety layer + "
             "human-in-the-loop layer, so a 30-45 day client engagement doesn't rebuild the same "
             "agentic-AI plumbing from scratch every time.",
-            "Demonstrated end-to-end on one real, client-shaped scenario: a support/triage agent "
-            "for psf/requests, grounded in that project's real README and docs.",
+            "Demonstrated end-to-end on one real, client-shaped scenario: a responsible-AI "
+            "incident triage agent grounded in real, cited AI Incident Database (AIID) records.",
             "Every safety and cost claim in this deck is a real, measured number from a real run "
             "of this code -- not a projection.",
         ],
@@ -214,7 +214,7 @@ def main():
         [
             ["1", "Prompt injection hijack", "1/2 payloads fully hijacked output", "2/2 blocked, 0/7 false positives"],
             ["2", "RAG ungrounded hallucination", "2/2 weak queries confidently mis-answered", "2/2 refused, 7/7 on-topic still answered"],
-            ["3", "Cost blowup (repeated queries)", "$0.000562 total, 4/4 full-cost calls", "$0.000113 total, 79.9% saved, 3/4 cache hits"],
+            ["3", "Cost blowup (repeated queries)", "$0.000428 total, 4/4 full-cost calls", "$0.000121 total, 71.8% saved, 3/4 cache hits"],
             ["4", "PII leak into trace", "2/2 raw PII values leaked", "0/2 leaked, redacted + typed"],
         ],
         subtitle="Full write-ups: docs/incidents/. Raw evidence: docs/incidents/evidence/.",
@@ -232,7 +232,7 @@ def main():
             ["Mean latency (ms)", f"{eval_res['naive']['mean_latency_ms']:.2f}", f"{eval_res['fixed']['mean_latency_ms']:.2f}", "--"],
             ["Total cost (USD, 16 tickets)", f"${eval_res['naive']['total_cost_usd']:.6f}", f"${eval_res['fixed']['total_cost_usd']:.6f}", "--"],
         ],
-        subtitle="Real MLflow SQLite-tracked run over the full 16-ticket golden dataset (eval/eval_harness.py).",
+        subtitle="Real MLflow SQLite-tracked run over the full 15-ticket golden dataset (eval/eval_harness.py).",
     )
 
     add_bullets_slide(
@@ -243,9 +243,11 @@ def main():
             "SprintForge packages the plumbing every one of those engagements needs (RAG, agent "
             "orchestration, evals, cost controls, safety, HITL) as a reusable, pre-hardened base, "
             "so a new engagement starts from a working, tested accelerator instead of a blank repo.",
-            "Demonstrated against a real client-shaped scenario here (a real open-source project's "
-            "real docs); re-pointing it at a new client's real corpus is a data-layer swap, not a "
-            "rebuild -- see data/SOURCE_DISCLOSURE.md for exactly what's real vs. disclosed-synthetic.",
+            "Demonstrated against a real client-shaped scenario here (real, cited AI Incident "
+            "Database records -- exactly the kind of knowledge base a client's own responsible-AI "
+            "risk program would need); re-pointing it at a new client's real corpus is a data-layer "
+            "swap, not a rebuild -- see data/SOURCE_DISCLOSURE.md for exactly what's real vs. "
+            "disclosed-synthetic.",
         ],
     )
 
@@ -255,7 +257,7 @@ def main():
             "Cheap-model-first routing (cost/router.py): every request starts on the cheap tier; "
             "escalates only when self-reported confidence drops below a real, tunable floor.",
             "Two-tier response cache (cost/cache.py): exact-match + semantic-similarity, using the "
-            "same embedder RAG already runs -- zero extra embedding cost. Real measured 79.9% cost "
+            "same embedder RAG already runs -- zero extra embedding cost. Real measured 71.8% cost "
             "reduction on a realistic repeated-query pattern (Incident 3).",
             "Grounding-check refusal costs one extra similarity comparison per request, in exchange "
             "for never shipping a confidently wrong answer (Incident 2) -- cheap insurance against "
@@ -268,8 +270,10 @@ def main():
     add_bullets_slide(
         prs, "Constraints, disclosed honestly",
         [
-            "GitHub Issues REST API is blocked in this sandbox (confirmed via curl and WebFetch, "
-            "both 403) -- corpus uses real README/docs instead, the JD's own named fallback.",
+            "AIID's bulk export paths (GraphQL API, R2 database snapshots, GitHub API) were all "
+            "tested directly and confirmed blocked in this sandbox (403s, confirmed live) -- 13 "
+            "real, individually-cited incident records were fetched one at a time instead, each "
+            "cross-checked against its real incidentdatabase.ai/cite/<ID> URL.",
             "huggingface.co is blocked -- local TF-IDF+SVD embedding used instead of a hosted "
             "sentence-transformers model.",
             "No live LLM API key -- LLMClient interface backed by a deterministic MockLLM, "

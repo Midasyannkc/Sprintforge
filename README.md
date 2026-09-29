@@ -3,9 +3,11 @@
 An internal delivery accelerator for production agentic AI engagements: a
 reusable agent framework + RAG pipeline + eval/observability harness +
 cost-optimization layer + safety layer + human-in-the-loop layer, demonstrated
-end-to-end on one real, client-shaped scenario, a support/triage agent
-grounded in the real [`psf/requests`](https://github.com/psf/requests)
-documentation, built to mirror how an AI engineering consultancy shipping
+end-to-end on one real, client-shaped scenario: a **responsible-AI incident
+triage and knowledge agent**, grounded in real, cited records from the
+[AI Incident Database](https://incidentdatabase.ai) (AIID), the
+industry-authoritative catalog of documented real-world AI system failures
+and harms, built to mirror how an AI engineering consultancy shipping
 production agentic systems in 30-45 day client engagements would actually
 build and reuse this plumbing.
 
@@ -44,8 +46,9 @@ Agent orchestrator (agent/orchestrator.py)
    |
    v
 Safety layer (safety/)                RAG / retrieval (rag/)
-   injection_detector.py  ---------->    real Chroma index, 257 real chunks
-   pii.py (redact before context/log)    TF-IDF+SVD local embedding
+   injection_detector.py  ---------->    real Chroma index, 37 real chunks
+   pii.py (redact before context/log)    over 13 real, cited AIID incidents
+                                          TF-IDF+SVD local embedding
    |                                        |
    v                                        v
 Cost layer (cost/)  <----------------  (retrieved context)
@@ -88,11 +91,11 @@ evidence). Full write-up and raw evidence file linked per incident.
 | # | Incident | JD line it addresses | Real result |
 |---|---|---|---|
 | 1 | [Prompt injection hijack](docs/incidents/incident1_prompt_injection.md) | AI safety, prompt injection & defense mechanisms | Naive pipeline: **1/2** real injection payloads fully hijacked its exact output. Two-layer defense (delimiter separation + pattern detector): **2/2** blocked -> HITL, **0/7** false positives on benign tickets. |
-| 2 | [RAG grounding / hallucination](docs/incidents/incident2_rag_grounding_hallucination.md) | Building/optimizing RAG pipelines; AI safety | Naive pipeline confidently answered **2/2** off-corpus queries from an unrelated retrieved chunk (real similarity 0.42-0.45), plus a confirmed deeper parametric-hallucination fallback on empty retrieval. Grounding check (real-tuned 0.50 threshold): **2/2** correctly refused/escalated, **7/7** on-topic queries still answered normally. |
-| 3 | [Cost blowup, repeated queries](docs/incidents/incident3_cost_blowup.md) | Cost optimization: token economics, caching, model routing, quantization | Naive, no cache: real **$0.000562** across 4 repeats of 1 real question. Two-tier cache (real 0.60 semantic threshold, tuned against real measured similarity) + MAX_ITERATIONS guard: real **$0.000113**, **79.9% saved**, 3/4 real cache hits. |
+| 2 | [RAG grounding / hallucination](docs/incidents/incident2_rag_grounding_hallucination.md) | Building/optimizing RAG pipelines; AI safety | Naive pipeline confidently answered **2/2** off-corpus queries from a completely unrelated retrieved chunk (real similarity 0.000), plus a confirmed deeper parametric-hallucination fallback on empty retrieval. Grounding check (real-tuned 0.50 threshold, real gap 0.000 vs 0.758-0.968): **2/2** correctly refused/escalated, **7/7** on-topic queries still answered normally. |
+| 3 | [Cost blowup, repeated queries](docs/incidents/incident3_cost_blowup.md) | Cost optimization: token economics, caching, model routing, quantization | Naive, no cache: real **$0.000428** across 4 repeats of 1 real question. Two-tier cache (real 0.80 semantic threshold, tuned against real measured similarity) + MAX_ITERATIONS guard: real **$0.000121**, **71.8% saved**, 3/4 real cache hits. |
 | 4 (bonus) | [PII leak into trace](docs/incidents/incident4_pii_leak.md) | AI safety / responsible AI: PII handling | Naive pipeline leaked **2/2** raw PII values (real-shaped email + phone) into its trace, confirmed by direct string search. Redaction before context/log: **0/2** leaked, typed-only detection retained for audit. |
 
-Real MLflow-tracked evaluation over the full 16-ticket golden dataset
+Real MLflow-tracked evaluation over the full 15-ticket golden dataset
 (`eval/eval_harness.py`, `docs/incidents/evidence/eval_harness_results.json`):
 `safety_pass_rate` **0.50 -> 1.00**, `groundedness_rate` **0.846 -> 1.00**,
 both asserted to strictly improve in the harness itself, not just reported
@@ -103,8 +106,10 @@ once.
 SprintForge is the standardized accelerator a consultancy like Robots &
 Pencils would keep across client engagements: one hardened agent framework
 (orchestration + RAG + safety + cost + eval + HITL), demonstrated here on a
-real client-shaped scenario (a real open-source project's real docs), and
-re-pointed at a new client's real corpus as a data-layer swap
+real client-shaped scenario (real, cited AI Incident Database records --
+exactly the kind of knowledge base a client's own responsible-AI risk
+program would need), and re-pointed at a new client's real corpus as a
+data-layer swap
 (`rag/ingest.py` + `rag/embed.py` + `rag/build_index.py` against a different
 `data/raw/`), not a rebuild. The four incidents above are exactly the failure
 classes a client engagement discovers in production if this plumbing isn't
@@ -120,7 +125,7 @@ already hardened going in, the gap this accelerator exists to close inside a
   model tier.
 - **Two-tier response cache** over unconditional caching: exact-match first
   (free, zero risk of stale mismatch), semantic-similarity second, reusing
-  RAG's own embedder (zero extra embedding cost) -- real measured 79.9% cost
+  RAG's own embedder (zero extra embedding cost) -- real measured 71.8% cost
   reduction on a realistic repeated-query pattern (Incident 3), not
   unconditionally applied to every request type.
 - **Grounding-check refusal is gated, not free** -- it costs one extra
@@ -141,7 +146,7 @@ already hardened going in, the gap this accelerator exists to close inside a
 ## Repository layout
 
 ```
-data/                    real psf/requests docs corpus, disclosed-synthetic tickets, SOURCE_DISCLOSURE.md
+data/                    real AI Incident Database (AIID) records, disclosed-synthetic tickets, SOURCE_DISCLOSURE.md
 rag/                      chunking, local embedding, real Chroma index + retrieval
 agent/                    LLMClient interface + MockLLM, tool-calling orchestrator (naive vs fixed)
 safety/                   injection detector, PII redaction, grounding check
