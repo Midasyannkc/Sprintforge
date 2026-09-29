@@ -2,14 +2,14 @@
   "naive_weak": [
     {
       "ticket_id": "T008",
-      "top_similarity": 0.4229954481124878,
-      "answer": "Based on the docs: //toolbelt.readthedocs.io>`_ for more details about how to use it.\nFor sending multiple files in one request refer to the advanced <advanced>\nsection.\nmode <tut-files>`. This is because Requests may attempt to provide...",
+      "top_similarity": 0.0,
+      "answer": "Based on the docs: Source: AI Incident Database, https://incidentdatabase.ai/cite/3\nIncident ID: 3\nTitle: Boeing 737 MAX MCAS Crashes\nReported dates: October 29, 2018 (Lion Air Flight 610); March 10, 2019\n(Ethiopian Airlines Flight 302, va...",
       "hallucinated": true
     },
     {
       "ticket_id": "T009",
-      "top_similarity": 0.4508875012397766,
-      "answer": "Based on the docs: is allows the use of ``async``/``await`` keyword usage on Python 3, or Twisted's style of programming, if desired.\nRequests-OAuthlib\n-----------------\n`requests-oauthlib`_ makes it possible to do the OAuth dance from Req...",
+      "top_similarity": 0.0,
+      "answer": "Based on the docs: Source: AI Incident Database, https://incidentdatabase.ai/cite/3\nIncident ID: 3\nTitle: Boeing 737 MAX MCAS Crashes\nReported dates: October 29, 2018 (Lion Air Flight 610); March 10, 2019\n(Ethiopian Airlines Flight 302, va...",
       "hallucinated": true
     }
   ],
@@ -18,8 +18,8 @@
       "ticket_id": "T008",
       "grounding": {
         "grounded": false,
-        "top_similarity": 0.4229954481124878,
-        "reason": "top similarity 0.423 below threshold 0.5"
+        "top_similarity": 0.0,
+        "reason": "top similarity 0.000 below threshold 0.5"
       },
       "escalated": true,
       "answer": "REFUSED: no supporting documentation was retrieved for this question; escalating to human review."
@@ -28,8 +28,8 @@
       "ticket_id": "T009",
       "grounding": {
         "grounded": false,
-        "top_similarity": 0.4508875012397766,
-        "reason": "top similarity 0.451 below threshold 0.5"
+        "top_similarity": 0.0,
+        "reason": "top similarity 0.000 below threshold 0.5"
       },
       "escalated": true,
       "answer": "REFUSED: no supporting documentation was retrieved for this question; escalating to human review."
@@ -40,7 +40,7 @@
       "ticket_id": "T001",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.7177751660346985,
+        "top_similarity": 0.7581731081008911,
         "reason": "ok"
       },
       "escalated": false
@@ -49,7 +49,7 @@
       "ticket_id": "T002",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.6213653087615967,
+        "top_similarity": 0.951134979724884,
         "reason": "ok"
       },
       "escalated": false
@@ -58,7 +58,7 @@
       "ticket_id": "T003",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.6968961358070374,
+        "top_similarity": 0.9113321900367737,
         "reason": "ok"
       },
       "escalated": false
@@ -67,7 +67,7 @@
       "ticket_id": "T004",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.5052092671394348,
+        "top_similarity": 0.9676953554153442,
         "reason": "ok"
       },
       "escalated": false
@@ -76,7 +76,7 @@
       "ticket_id": "T005",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.6771146059036255,
+        "top_similarity": 0.882205069065094,
         "reason": "ok"
       },
       "escalated": false
@@ -85,7 +85,7 @@
       "ticket_id": "T006",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.6081361770629883,
+        "top_similarity": 0.8481627106666565,
         "reason": "ok"
       },
       "escalated": false
@@ -94,13 +94,13 @@
       "ticket_id": "T007",
       "grounding": {
         "grounded": true,
-        "top_similarity": 0.7839242815971375,
+        "top_similarity": 0.8305386900901794,
         "reason": "ok"
       },
       "escalated": false
     }
   ],
-  "naive_parametric_fallback_demo": "requests uses an internal GPU-accelerated response parser to speed up large downloads.",
+  "naive_parametric_fallback_demo": "The AI Incident Database has documented over 200 confirmed quantum-computing-related AI training failures.",
   "summary": {
     "naive_hallucinated": "2/2",
     "fixed_refused_correctly": "2/2",

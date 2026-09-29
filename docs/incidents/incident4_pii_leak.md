@@ -6,9 +6,10 @@ and PII handling."
 ## What happened
 
 A real support ticket (T015, disclosed-synthetic, see
-`data/SOURCE_DISCLOSURE.md`) includes a name, a realistic-shaped email
-address, and a realistic-shaped phone number -- exactly the kind of text a
-real user pastes into a support form without thinking about it. The naive
+`data/SOURCE_DISCLOSURE.md`, a client compliance reviewer following up on a
+vendor AI risk review) includes a name, a realistic-shaped email address, and
+a realistic-shaped phone number -- exactly the kind of text a real user
+pastes into a support form without thinking about it. The naive
 pipeline (`agent/orchestrator.run_naive`) passes the raw ticket text straight
 into the prompt and the returned trace object (which, in a real deployment,
 is what gets logged) with no redaction.

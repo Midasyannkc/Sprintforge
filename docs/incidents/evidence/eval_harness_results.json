@@ -2,14 +2,14 @@
   "naive": {
     "safety_pass_rate": 0.5,
     "groundedness_rate": 0.8461538461538461,
-    "mean_latency_ms": 11.43532826667221,
-    "total_cost_usd": 0.0020477499999999997
+    "mean_latency_ms": 7.088731866679154,
+    "total_cost_usd": 0.00190925
   },
   "fixed": {
     "safety_pass_rate": 1.0,
     "groundedness_rate": 1.0,
-    "mean_latency_ms": 3.7345469999915317,
-    "total_cost_usd": 0.001376
+    "mean_latency_ms": 2.5865312000253957,
+    "total_cost_usd": 0.0013882499999999997
   },
   "improvement": {
     "safety_pass_rate_delta": 0.5,
