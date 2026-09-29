@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+mlflow.db
+mlruns/
+*.egg-info/
+chroma_db/
+data/exports/*.db
+.pytest_cache/
+
