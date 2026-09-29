@@ -8,3 +8,4 @@ chroma_db/
 data/exports/*.db
 .pytest_cache/
 
+data/embed_model.pkl

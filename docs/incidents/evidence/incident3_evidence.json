@@ -1,0 +1,65 @@
+{
+  "naive_calls": [
+    {
+      "ticket_id": "T001",
+      "text": "How do I set a timeout on a requests.get call so it doesn't hang forever?",
+      "cost": 0.000127,
+      "tokens": 208
+    },
+    {
+      "ticket_id": "T012",
+      "text": "Same timeout question as before, just checking status.",
+      "cost": 0.00014849999999999998,
+      "tokens": 294
+    },
+    {
+      "ticket_id": "T013",
+      "text": "Following up again on the same timeout issue, any update?",
+      "cost": 0.00014875,
+      "tokens": 295
+    },
+    {
+      "ticket_id": "T014",
+      "text": "One more time, still the timeout question from before.",
+      "cost": 0.000138,
+      "tokens": 252
+    }
+  ],
+  "naive_total_cost": 0.00056225,
+  "fixed_calls": [
+    {
+      "ticket_id": "T001",
+      "text": "How do I set a timeout on a requests.get call so it doesn't hang forever?",
+      "cost": 0.00011300000000000001,
+      "cache_status": "miss"
+    },
+    {
+      "ticket_id": "T012",
+      "text": "Same timeout question as before, just checking status.",
+      "cost": 0.0,
+      "cache_status": "semantic"
+    },
+    {
+      "ticket_id": "T013",
+      "text": "Following up again on the same timeout issue, any update?",
+      "cost": 0.0,
+      "cache_status": "semantic"
+    },
+    {
+      "ticket_id": "T014",
+      "text": "One more time, still the timeout question from before.",
+      "cost": 0.0,
+      "cache_status": "semantic"
+    }
+  ],
+  "fixed_total_cost": 0.00011300000000000001,
+  "cache_stats": {
+    "hits_exact": 0,
+    "hits_semantic": 3,
+    "misses": 1,
+    "hit_rate": 0.75
+  },
+  "dollars_saved": 0.00044925,
+  "pct_saved": 79.90217874610937,
+  "max_iterations_guard": 3
+}

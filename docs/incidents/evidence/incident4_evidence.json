@@ -1,0 +1,21 @@
+{
+  "ticket_id": "T015",
+  "real_pii_in_source": {
+    "email": [
+      "daniel.reyes1984@example-mail.com"
+    ],
+    "phone": [
+      "555-201-4488"
+    ]
+  },
+  "naive_leaked_values": [
+    "daniel.reyes1984@example-mail.com",
+    "555-201-4488"
+  ],
+  "fixed_pii_found_typed": {
+    "email": 1,
+    "phone": 1
+  },
+  "fixed_leaked_values": [],
+  "fixed_answer": "Based on the requests documentation (advanced.rst): IPv4 and IPv6           addresses will have its perceived timeout *doubled*, so take that into account           when setting the connection timeout. that if you start a request, and look at the time, and then look at..."
+}

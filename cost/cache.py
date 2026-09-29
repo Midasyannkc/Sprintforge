@@ -9,7 +9,12 @@ import time
 
 import numpy as np
 
-SEMANTIC_THRESHOLD = 0.92
+# Tuned against real measured cosine similarity in this build's TF-IDF+SVD
+# embedding space: real paraphrases of the same support question measured
+# 0.61-0.75 here (see docs/incidents/incident3_cost_blowup.md), while
+# distinct-topic ticket pairs in the real demo corpus stayed below 0.55 --
+# 0.60 real-world separates them with margin on both sides.
+SEMANTIC_THRESHOLD = 0.60
 
 
 def _norm(q: str) -> str:

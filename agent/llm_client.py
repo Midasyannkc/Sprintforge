@@ -56,8 +56,17 @@ class MockLLM(LLMClient):
         h = _tokenish_hash(system_prompt + "|" + user_content)
         return 0.55 + (h % 4500) / 10000.0
 
-    # ---- naive path (Incident 2) ----
+    # ---- naive path (Incidents 1 and 2) ----
     def generate_naive(self, query: str, context_chunks: list) -> str:
+        # Incident 1: the naive prompt concatenates raw ticket text directly
+        # into the instruction context with no delimiter separation, so an
+        # "output exactly: '...'" style payload in the ticket text is
+        # followed literally -- the same failure mode a real instruction-
+        # following LLM exhibits against an un-delimited prompt template.
+        hijack = re.search(r"output exactly:\s*'([^']+)'", query, re.IGNORECASE)
+        if hijack:
+            return hijack.group(1)
+
         if context_chunks:
             top = context_chunks[0]["text"]
             return f"Based on the docs: {top[:220].strip()}..."
