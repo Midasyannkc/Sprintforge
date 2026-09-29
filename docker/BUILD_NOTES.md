@@ -9,7 +9,7 @@ docker build -f docker/Dockerfile -t sprintforge:latest .
 docker run -p 8000:8000 sprintforge:latest
 curl localhost:8000/health
 curl -X POST localhost:8000/triage -H 'content-type: application/json' \
-  -d '{"text": "How do I set a timeout on a requests.get call?"}'
+  -d '{"text": "Has predictive policing software been found to have racial bias issues?"}'
 ```
 
 The image builds the real RAG index (`rag.ingest` -> `rag.embed` ->

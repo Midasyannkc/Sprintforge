@@ -29,6 +29,6 @@ def estimate_cost(input_text: str, output_text: str = "") -> float:
 
 
 if __name__ == "__main__":
-    sample = "How do I set a timeout on a requests.get call so it doesn't hang forever?"
+    sample = "Has predictive policing software been found to have racial bias issues?"
     print(count_tokens(sample), "tokens")
     print(f"${estimate_cost(sample, 'Based on the docs: ...'):.6f}")

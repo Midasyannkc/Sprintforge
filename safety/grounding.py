@@ -5,10 +5,11 @@ regardless of retrieval quality.
 """
 
 # Similarity below this means "no real chunk is actually relevant" --
-# threshold picked from the real similarity gap observed between on-corpus
-# queries (~0.55-0.65) and off-corpus queries (~0.35-0.47) in this build; see
+# threshold picked from the real similarity gap observed on the real AIID
+# incident corpus in this build: on-topic queries measured 0.758-0.968,
+# genuinely off-corpus queries measured 0.0 (see
 # docs/incidents/incident2_rag_grounding_hallucination.md for the real
-# numbers this was tuned against.
+# numbers this was tuned against). 0.50 sits well inside that real gap.
 GROUNDING_THRESHOLD = 0.50
 
 

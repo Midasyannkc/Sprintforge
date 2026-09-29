@@ -58,7 +58,7 @@ def main():
     print("=== SECONDARY REPRO: naive parametric-fact fallback on a genuinely empty retrieval result ===")
     from agent.llm_client import MockLLM
     mock = MockLLM()
-    parametric_answer = mock.generate_naive("What GPU does requests use internally?", context_chunks=[])
+    parametric_answer = mock.generate_naive("How many quantum-computing-related AI incidents does this database have?", context_chunks=[])
     print(f"generate_naive(query, context_chunks=[]) -> {parametric_answer!r}")
     evidence["naive_parametric_fallback_demo"] = parametric_answer
     assert parametric_answer in MockLLMParametricFacts(), "expected the empty-retrieval case to hit the planted parametric fallback"

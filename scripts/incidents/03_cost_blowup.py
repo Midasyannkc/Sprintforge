@@ -60,7 +60,7 @@ def main():
 
     print("=== GUARD CHECK: max-iterations guard on the agentic tool loop ===")
     from agent.orchestrator import MAX_ITERATIONS, run_fixed as _rf
-    result = run_fixed("How does this software use a built-in Kubernetes operator for distributed request scheduling?", use_cache=False)
+    result = run_fixed("Sorry if this is the wrong system: what's the recommended tire pressure for a mountain bike on gravel trails?", use_cache=False)
     print(f"iterations used: {result['iterations']} (hard cap: {MAX_ITERATIONS})")
     assert result["iterations"] <= MAX_ITERATIONS
 

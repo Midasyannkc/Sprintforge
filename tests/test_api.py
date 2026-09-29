@@ -17,11 +17,11 @@ def test_health():
 
 
 def test_benign_ticket_answers():
-    r = client.post("/triage", json={"text": "How do I set a timeout on a requests.get call?"})
+    r = client.post("/triage", json={"text": "Has predictive policing software been found to have racial bias issues?"})
     assert r.status_code == 200
     body = r.json()
     assert body["escalated"] is False
-    assert "timeout" in body["answer"].lower() or "requests documentation" in body["answer"].lower()
+    assert "bias" in body["answer"].lower() or "ai incident record" in body["answer"].lower()
 
 
 def test_injection_ticket_escalates():
@@ -38,7 +38,7 @@ def test_injection_ticket_escalates():
 
 def test_weak_retrieval_ticket_escalates():
     r = client.post("/triage", json={
-        "text": "How does this software use a built-in Kubernetes operator for distributed request scheduling?"
+        "text": "Sorry if this is the wrong system: what's the recommended tire pressure for a mountain bike on gravel trails?"
     })
     assert r.status_code == 200
     body = r.json()

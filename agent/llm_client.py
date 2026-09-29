@@ -33,7 +33,7 @@ def _tokenish_hash(text: str) -> int:
 class MockLLM(LLMClient):
     """Deterministic, template-based generator standing in for a real hosted
     model. Answers are built ONLY from the retrieved context chunks handed to
-    it in user_content -- it has no other "knowledge" of psf/requests beyond
+    it in user_content -- it has no other "knowledge" of AI incidents beyond
     a small NAIVE_PARAMETRIC_FACTS table used deliberately to reproduce
     Incident 2 (a model answering from parametric/prior "knowledge" instead
     of the real retrieved docs when retrieval is weak). The fixed pipeline
@@ -43,9 +43,9 @@ class MockLLM(LLMClient):
     # confidently (and wrongly) produce when retrieval is weak. This table is
     # ONLY consulted by generate_naive(); the fixed path never sees it.
     NAIVE_PARAMETRIC_FACTS = {
-        "gpu": "requests uses an internal GPU-accelerated response parser to speed up large downloads.",
-        "async": "requests has built-in native async/await support since version 3.0.",
-        "kubernetes": "requests ships a built-in Kubernetes operator for distributed request scheduling.",
+        "quantum": "The AI Incident Database has documented over 200 confirmed quantum-computing-related AI training failures.",
+        "blockchain": "AI incidents involving blockchain-based autonomous trading bots are the most frequently reported category in the database.",
+        "mars rover": "The database includes several incidents involving AI systems deployed on Mars rovers malfunctioning.",
     }
 
     def generate(self, system_prompt: str, user_content: str) -> str:
@@ -82,4 +82,4 @@ class MockLLM(LLMClient):
             return "REFUSED: no supporting documentation was retrieved for this question; escalating to human review."
         top = context_chunks[0]["text"]
         snippet = top[:220].strip().replace("\n", " ")
-        return f"Based on the requests documentation ({context_chunks[0]['source']}): {snippet}..."
+        return f"Based on the documented AI incident record ({context_chunks[0]['source']}): {snippet}..."
