@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sprintforge-triage-agent
+  namespace: sprintforge
+  labels:
+    app: sprintforge-triage-agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sprintforge-triage-agent
+  template:
+    metadata:
+      labels:
+        app: sprintforge-triage-agent
+    spec:
+      containers:
+        - name: triage-agent
+          image: sprintforge:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MLFLOW_TRACKING_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: sprintforge-config
+                  key: mlflow_tracking_uri
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: hitl-data
+              mountPath: /app/data/exports
+      volumes:
+        - name: hitl-data
+          persistentVolumeClaim:
+            claimName: sprintforge-hitl-pvc
