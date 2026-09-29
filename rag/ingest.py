@@ -1,4 +1,5 @@
-"""Real chunking of the real fetched psf/requests README + docs corpus.
+"""Real chunking of the real fetched AI Incident Database (AIID) incident
+reports corpus (data/raw/aiid_incident_*.md, see data/SOURCE_DISCLOSURE.md).
 
 Chunking strategy: paragraph-aware sliding window. Splits each source file on
 blank-line boundaries (real paragraph/section breaks in the .rst/.md source),
